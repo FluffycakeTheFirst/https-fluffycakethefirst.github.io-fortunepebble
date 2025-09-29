@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Zufälliger Satz</title>
+  <title>Glückskeks des Tages</title>
   <style>
     body {
       margin: 0;
@@ -15,6 +15,10 @@
       font-family: sans-serif;
       text-align: center;
       transition: background 1s;
+      padding: 1em;
+    }
+    #satz {
+      max-width: 800px;
     }
   </style>
 </head>
@@ -22,20 +26,40 @@
   <div id="satz"></div>
 
   <script>
-    // Sammlung von Sätzen mit jeweiligem Hintergrund
-    const daten = [
-      { text: "Heute wird ein guter Tag!", bg: "linear-gradient(120deg, #84fab0, #8fd3f4)" },
-      { text: "Träume groß, fang klein an.", bg: "linear-gradient(120deg, #ff9a9e, #fad0c4)" },
-      { text: "Mut ist der Anfang von allem.", bg: "linear-gradient(120deg, #a18cd1, #fbc2eb)" },
-      { text: "Jeder Schritt zählt.", bg: "linear-gradient(120deg, #fddb92, #d1fdff)" }
+    // Sammlung von Sprüchen
+    const sprueche = [
+      "Heute wird ein guter Tag!",
+      "Träume groß, fang klein an.",
+      "Mut ist der Anfang von allem.",
+      "Jeder Schritt zählt.",
+      "Ein Lächeln kann Wunder wirken.",
+      "Habe Geduld, alles braucht seine Zeit.",
+      "Vertraue auf dein Bauchgefühl.",
+      "Kleine Schritte führen zum Ziel."
     ];
 
-    // Zufällig einen Satz auswählen
-    const zufall = daten[Math.floor(Math.random() * daten.length)];
+    // Sammlung von Hintergründen
+    const hintergruende = [
+      "linear-gradient(120deg, #84fab0, #8fd3f4)",
+      "linear-gradient(120deg, #ff9a9e, #fad0c4)",
+      "linear-gradient(120deg, #a18cd1, #fbc2eb)",
+      "linear-gradient(120deg, #fddb92, #d1fdff)",
+      "linear-gradient(120deg, #f6d365, #fda085)",
+      "linear-gradient(120deg, #89f7fe, #66a6ff)"
+    ];
 
-    // Text + Hintergrund einsetzen
-    document.getElementById("satz").innerText = zufall.text;
-    document.body.style.background = zufall.bg;
+    // Datum als Zahl für festen Spruch
+    const heute = new Date();
+    const tagNum = heute.getFullYear()*10000 + (heute.getMonth()+1)*100 + heute.getDate();
+    const spruchIndex = tagNum % sprueche.length;
+    const spruch = sprueche[spruchIndex];
+
+    // Zufälligen Hintergrund auswählen
+    const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
+
+    // Einsetzen
+    document.getElementById("satz").innerText = spruch;
+    document.body.style.background = bg;
   </script>
 </body>
 </html>
