@@ -2,10 +2,40 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Meine erste Website</title>
+  <title>Zufälliger Satz</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2em;
+      font-family: sans-serif;
+      text-align: center;
+      transition: background 1s;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hallo Welt 🌍</h1>
-  <p>Das ist meine erste statische Website bei GitHub Pages.</p>
+  <div id="satz"></div>
+
+  <script>
+    // Sammlung von Sätzen mit jeweiligem Hintergrund
+    const daten = [
+      { text: "Heute wird ein guter Tag!", bg: "linear-gradient(120deg, #84fab0, #8fd3f4)" },
+      { text: "Träume groß, fang klein an.", bg: "linear-gradient(120deg, #ff9a9e, #fad0c4)" },
+      { text: "Mut ist der Anfang von allem.", bg: "linear-gradient(120deg, #a18cd1, #fbc2eb)" },
+      { text: "Jeder Schritt zählt.", bg: "linear-gradient(120deg, #fddb92, #d1fdff)" }
+    ];
+
+    // Zufällig einen Satz auswählen
+    const zufall = daten[Math.floor(Math.random() * daten.length)];
+
+    // Text + Hintergrund einsetzen
+    document.getElementById("satz").innerText = zufall.text;
+    document.body.style.background = zufall.bg;
+  </script>
 </body>
 </html>
