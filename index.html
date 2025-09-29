@@ -17,16 +17,14 @@
       transition: background 1s;
       padding: 1em;
     }
-    #satz {
-      max-width: 800px;
-    }
+    #satz { max-width: 800px; }
   </style>
 </head>
 <body>
   <div id="satz"></div>
 
   <script>
-    // Sammlung von Sprüchen
+    // --- Sprüche ---
     const sprueche = [
       "Heute wird ein guter Tag!",
       "Träume groß, fang klein an.",
@@ -38,7 +36,7 @@
       "Kleine Schritte führen zum Ziel."
     ];
 
-    // Sammlung von Hintergründen
+    // --- Hintergründe ---
     const hintergruende = [
       "linear-gradient(120deg, #84fab0, #8fd3f4)",
       "linear-gradient(120deg, #ff9a9e, #fad0c4)",
@@ -48,18 +46,44 @@
       "linear-gradient(120deg, #89f7fe, #66a6ff)"
     ];
 
-    // Datum als Zahl für festen Spruch
+    // --- Chip-ID vom NFC-Scan / URL-Parameter ---
+    // Beispiel: "?chip=chip1" → window.location.search
+    const urlParams = new URLSearchParams(window.location.search);
+    const chipID = urlParams.get("chip") || "unknown"; // fallback falls keine ID
+
+    // --- Datum als Zahl für tagesaktuell ---
     const heute = new Date();
     const tagNum = heute.getFullYear()*10000 + (heute.getMonth()+1)*100 + heute.getDate();
-    const spruchIndex = tagNum % sprueche.length;
-    const spruch = sprueche[spruchIndex];
 
-    // Zufälligen Hintergrund auswählen
+    // --- Chip-ID in Zahl umwandeln ---
+    let chipNum = 0;
+    for (let i = 0; i < chipID.length; i++) {
+      chipNum += chipID.charCodeAt(i);
+    }
+
+    // --- Spruch-Index berechnen ---
+    const index = (tagNum + chipNum) % sprueche.length;
+    const spruch = sprueche[index];
+
+    // --- Zufälliger Hintergrund ---
     const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
 
-    // Einsetzen
+    // --- Ausgabe ---
     document.getElementById("satz").innerText = spruch;
     document.body.style.background = bg;
+
+    // --- Optional: Daten ans Logging schicken (Google Sheet / Server) ---
+    /*
+    fetch("DEINE_WEBAPP_URL_HIER", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chipId: chipID,
+        page: window.location.pathname,
+        userAgent: navigator.userAgent
+      })
+    }).catch(err => console.warn("Logging fehlgeschlagen", err));
+    */
   </script>
 </body>
 </html>
