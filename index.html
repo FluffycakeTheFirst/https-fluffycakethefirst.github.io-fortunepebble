@@ -69,7 +69,7 @@
     const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
     document.body.style.background = bg;
 
-    fetch('fortunepebbles.txt')
+    fetch('fortunepebble.txt')
       .then(response => response.text())
       .then(text => {
         const sprueche = text.split('\n').filter(line => line.trim() !== '');
@@ -84,3 +84,4 @@
   </script>
 </body>
 </html>
+
