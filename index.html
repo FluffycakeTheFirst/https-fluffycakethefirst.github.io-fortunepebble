@@ -10,20 +10,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(120deg, #84fab0, #8fd3f4);
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 1em;
+      transition: background 1s; /* sanfter Übergang beim Laden */
     }
 
     #satz {
-      max-width: 90%;               /* Zeilen nicht zu breit */
-      font-size: 6vw;               /* große, aber nicht bildschirmfüllende Schrift */
+      max-width: 90%;
+      font-size: 6vw;
       font-weight: bold;            
       color: #ffffff;              
-      text-shadow: 3px 3px 8px rgba(0,0,0,0.7); /* guter Kontrast */
-      line-height: 1.2;             /* angenehmer Zeilenabstand */
-      word-wrap: break-word;        /* lange Zeilen umbrechen */
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
+      line-height: 1.2;
+      word-wrap: break-word;
     }
   </style>
 </head>
@@ -31,7 +31,7 @@
   <div id="satz"></div>
 
   <script>
-    // Beispiel-Sprüche
+    // Sprüche
     const sprueche = [
       "Heute wird ein guter Tag!",
       "Träume groß, fang klein an.",
@@ -39,7 +39,17 @@
       "Jeder Schritt zählt."
     ];
 
-    // Beispiel-ID
+    // Hintergründe (Farbverläufe)
+    const hintergruende = [
+      "linear-gradient(120deg, #84fab0, #8fd3f4)",
+      "linear-gradient(120deg, #ff9a9e, #fad0c4)",
+      "linear-gradient(120deg, #a18cd1, #fbc2eb)",
+      "linear-gradient(120deg, #fddb92, #d1fdff)",
+      "linear-gradient(120deg, #f6d365, #fda085)",
+      "linear-gradient(120deg, #89f7fe, #66a6ff)"
+    ];
+
+    // Chip-ID
     const chipID = "chip1";
 
     // Tagesnummer
@@ -52,17 +62,16 @@
       chipNum += chipID.charCodeAt(i);
     }
 
-    // Index für Spruch
+    // Spruch-Index
     const index = (tagNum + chipNum) % sprueche.length;
     const spruch = sprueche[index];
 
-    // Ausgabe
+    // Zufälligen Hintergrund auswählen
+    const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
+    document.body.style.background = bg;
+
+    // Spruch ausgeben
     document.getElementById("satz").innerText = spruch;
   </script>
 </body>
 </html>
-
-
-
-
-
