@@ -13,7 +13,7 @@
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 1em;
-      transition: background 1s; /* sanfter Übergang beim Laden */
+      transition: background 1s;
     }
 
     #satz {
@@ -25,13 +25,29 @@
       line-height: 1.2;
       word-wrap: break-word;
     }
+
+    /* Logo-Container */
+    #logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    #logo img {
+      height: 60px; /* Logo-Größe anpassen */
+      width: auto;
+    }
   </style>
 </head>
 <body>
+  <!-- Logo -->
+  <div id="logo">
+    <img src="250930_Logo.png" alt="Logo">
+  </div>
+
   <div id="satz"></div>
 
   <script>
-    // Hintergründe (Farbverläufe)
     const hintergruende = [
       "linear-gradient(120deg, #84fab0, #8fd3f4)",
       "linear-gradient(120deg, #ff9a9e, #fad0c4)",
@@ -41,29 +57,23 @@
       "linear-gradient(120deg, #89f7fe, #66a6ff)"
     ];
 
-    // Chip-ID
     const chipID = "chip1";
-
-    // Tagesnummer
     const heute = new Date();
     const tagNum = heute.getFullYear()*10000 + (heute.getMonth()+1)*100 + heute.getDate();
 
-    // Chip-ID in Zahl umwandeln
     let chipNum = 0;
     for (let i = 0; i < chipID.length; i++) {
       chipNum += chipID.charCodeAt(i);
     }
 
-    // Zufälligen Hintergrund auswählen
     const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
     document.body.style.background = bg;
 
-    // Sprüche aus externer Datei laden
-    fetch('fortunepebble.txt')
+    fetch('fortunepebbles.txt')
       .then(response => response.text())
       .then(text => {
-        const sprueche = text.split('\n').filter(line => line.trim() !== ''); // leere Zeilen entfernen
-        const index = (tagNum + chipNum) % sprueche.length; // Spruch auswählen
+        const sprueche = text.split('\n').filter(line => line.trim() !== '');
+        const index = (tagNum + chipNum) % sprueche.length;
         const spruch = sprueche[index];
         document.getElementById("satz").innerText = spruch;
       })
