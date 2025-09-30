@@ -8,12 +8,19 @@
       margin: 0;
       height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;   /* Inhalte untereinander anordnen */
+      justify-content: center;  /* vertikal zentrieren */
+      align-items: center;      /* horizontal zentrieren */
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 1em;
       transition: background 1s;
+    }
+
+    #logo img {
+      height: 540px;  /* Logo-Größe (dreifach vergrößert + nochmal Faktor 3) */
+      width: auto;
+      margin-bottom: 2em; /* Abstand nach unten (ca. 2 Zeilen) */
     }
 
     #satz {
@@ -25,26 +32,15 @@
       line-height: 1.2;
       word-wrap: break-word;
     }
-
-    /* Logo-Container */
-    #logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-
-    #logo img {
-      height: 540px; /* dreimal so groß wie vorher */
-      width: auto;   /* Verhältnis bleibt erhalten */
-    }
   </style>
 </head>
 <body>
   <!-- Logo -->
   <div id="logo">
-    <img src="250930_Logo.png" alt="Logo">
+    <img src="logo.png" alt="Logo">
   </div>
 
+  <!-- Spruch -->
   <div id="satz"></div>
 
   <script>
@@ -84,6 +80,3 @@
   </script>
 </body>
 </html>
-
-
-
