@@ -31,14 +31,6 @@
   <div id="satz"></div>
 
   <script>
-    // Sprüche
-    const sprueche = [
-      "Heute wird ein guter Tag!",
-      "Träume groß, fang klein an.",
-      "Mut ist der Anfang von allem.",
-      "Jeder Schritt zählt."
-    ];
-
     // Hintergründe (Farbverläufe)
     const hintergruende = [
       "linear-gradient(120deg, #84fab0, #8fd3f4)",
@@ -62,16 +54,23 @@
       chipNum += chipID.charCodeAt(i);
     }
 
-    // Spruch-Index
-    const index = (tagNum + chipNum) % sprueche.length;
-    const spruch = sprueche[index];
-
     // Zufälligen Hintergrund auswählen
     const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
     document.body.style.background = bg;
 
-    // Spruch ausgeben
-    document.getElementById("satz").innerText = spruch;
+    // Sprüche aus externer Datei laden
+    fetch('fortunepebble.txt')
+      .then(response => response.text())
+      .then(text => {
+        const sprueche = text.split('\n').filter(line => line.trim() !== ''); // leere Zeilen entfernen
+        const index = (tagNum + chipNum) % sprueche.length; // Spruch auswählen
+        const spruch = sprueche[index];
+        document.getElementById("satz").innerText = spruch;
+      })
+      .catch(err => {
+        console.error('Fehler beim Laden der Sprüche:', err);
+        document.getElementById("satz").innerText = "Fehler beim Laden der Sprüche!";
+      });
   </script>
 </body>
 </html>
