@@ -9,7 +9,6 @@
       height: 100vh;
       display: flex;
       flex-direction: column;   /* Inhalte untereinander anordnen */
-      justify-content: center;  /* vertikal zentrieren */
       align-items: center;      /* horizontal zentrieren */
       font-family: 'Arial', sans-serif;
       text-align: center;
@@ -17,10 +16,17 @@
       transition: background 1s;
     }
 
+    #content {
+      margin-top: 40px; /* Abstand vom oberen Rand */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     #logo img {
       height: 540px;  /* Logo-Größe */
       width: auto;
-      margin-bottom: 0; /* KEIN Abstand zwischen Logo und Spruch */
+      margin-bottom: 0; /* kein Abstand zwischen Logo und Spruch */
       display: block;
     }
 
@@ -36,13 +42,15 @@
   </style>
 </head>
 <body>
-  <!-- Logo -->
-  <div id="logo">
-    <img src="250930_Logo.png" alt="Logo">
-  </div>
+  <div id="content">
+    <!-- Logo -->
+    <div id="logo">
+      <img src="250930_Logo.png" alt="Logo">
+    </div>
 
-  <!-- Spruch -->
-  <div id="satz"></div>
+    <!-- Spruch -->
+    <div id="satz"></div>
+  </div>
 
   <script>
     const hintergruende = [
