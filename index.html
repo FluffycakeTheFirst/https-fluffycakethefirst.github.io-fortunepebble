@@ -18,9 +18,10 @@
     }
 
     #logo img {
-      height: 540px;  /* Logo-Größe (dreifach vergrößert + nochmal Faktor 3) */
+      height: 540px;  /* Logo-Größe */
       width: auto;
-      margin-bottom: 2em; /* Abstand nach unten (ca. 2 Zeilen) */
+      margin-bottom: 0; /* KEIN Abstand zwischen Logo und Spruch */
+      display: block;
     }
 
     #satz {
@@ -38,7 +39,10 @@
   <!-- Logo -->
   <div id="logo">
     <img src="250930_Logo.png" alt="Logo">
-  </div><div id="satz"></div>
+  </div>
+
+  <!-- Spruch -->
+  <div id="satz"></div>
 
   <script>
     const hintergruende = [
@@ -77,6 +81,3 @@
   </script>
 </body>
 </html>
-
-
-
