@@ -18,10 +18,9 @@
     }
 
     #logo img {
-      height: 540px;   /* Logo-Größe */
+      height: 540px;  /* Logo-Größe (dreifach vergrößert + nochmal Faktor 3) */
       width: auto;
-      margin-bottom: 0; /* kein Abstand */
-      display: block;   /* entfernt Standard-Text-Abstand */
+      margin-bottom: 2em; /* Abstand nach unten (ca. 2 Zeilen) */
     }
 
     #satz {
@@ -38,8 +37,9 @@
 <body>
   <!-- Logo -->
   <div id="logo">
-    <img src="250930_Logo.png" alt="Logo">
+    <img src="logo.png" alt="Logo">
   </div>
+
   <!-- Spruch -->
   <div id="satz"></div>
 
@@ -75,4 +75,8 @@
       })
       .catch(err => {
         console.error('Fehler beim Laden der Sprüche:', err);
-        docume
+        document.getElementById("satz").innerText = "Fehler beim Laden der Sprüche!";
+      });
+  </script>
+</body>
+</html>
