@@ -8,8 +8,8 @@
       margin: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column;   /* Inhalte untereinander anordnen */
-      align-items: center;      /* horizontal zentrieren */
+      flex-direction: column;   
+      align-items: center;      
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 1em;
@@ -17,16 +17,16 @@
     }
 
     #content {
-      margin-top: 160px; /* Abstand vom oberen Rand */
+      margin-top: 160px; 
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     #logo img {
-      height: 540px;  /* Logo-Größe */
+      height: 540px;
       width: auto;
-      margin-bottom: 0; /* kein Abstand zwischen Logo und Spruch */
+      margin-bottom: 0; 
       display: block;
     }
 
@@ -38,23 +38,26 @@
       text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
       line-height: 1.2;
       word-wrap: break-word;
-      margin: 0.5em 0 1em 0; /* etwas Platz zum Button */
+      margin: 0.5em 0 1em 0;
     }
 
+    /* Mystischer Button */
     #newButton {
-      font-size: 1.2em;
-      padding: 0.6em 1.2em;
-      border: none;
-      border-radius: 8px;
-      background-color: #ffffffcc;
-      color: #333;
+      font-size: 1.3em;
+      padding: 0.6em 1.5em;
+      border: 2px solid #fff;
+      border-radius: 30px;
+      background: transparent;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: all 0.3s ease;
     }
 
     #newButton:hover {
-      background-color: #fff;
-      transform: scale(1.05);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+      transform: scale(1.08);
     }
   </style>
 </head>
@@ -68,8 +71,8 @@
     <!-- Spruch -->
     <div id="satz"></div>
 
-    <!-- Button -->
-    <button id="newButton">Neuen Spruch anzeigen</button>
+    <!-- Mystischer Button -->
+    <button id="newButton">✨ Neuer Spruch ✨</button>
   </div>
 
   <script>
@@ -106,17 +109,15 @@
       let newIndex;
       do {
         newIndex = Math.floor(Math.random() * sprueche.length);
-      } while (newIndex === currentIndex); // nie denselben Spruch direkt wiederholen
+      } while (newIndex === currentIndex);
       currentIndex = newIndex;
       zeigeSpruch(currentIndex);
     }
 
-    // Sprüche laden
     fetch('fortunepebble.txt')
       .then(response => response.text())
       .then(text => {
         sprueche = text.split('\n').filter(line => line.trim() !== '');
-        // Ersten Spruch nach Tageslogik
         currentIndex = (tagNum + chipNum) % sprueche.length;
         zeigeSpruch(currentIndex);
       })
@@ -125,7 +126,6 @@
         document.getElementById("satz").innerText = "Fehler beim Laden der Sprüche!";
       });
 
-    // Button verbinden
     document.getElementById("newButton").addEventListener("click", neuerSpruch);
   </script>
 </body>
