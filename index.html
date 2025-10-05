@@ -47,21 +47,19 @@
     }
 
     #neuerSpruch {
-      padding: 20px 40px;
-      font-size: 1.5em;
+      padding: 12px 24px;
+      font-size: 1.2em;
       font-weight: bold;
-      color: white;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #ffffff;
+      background: #333;   /* schlichtes dunkles Grau */
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s, background 0.3s;
+      transition: background 0.2s;
     }
 
     #neuerSpruch:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+      background: #555;  /* etwas heller beim Hover */
     }
   </style>
 </head>
@@ -76,19 +74,10 @@
     <div id="satz"></div>
 
     <!-- Button -->
-    <button id="neuerSpruch">🍪 Neuer Spruch</button>
+    <button id="neuerSpruch">Neuer Spruch</button>
   </div>
 
   <script>
-    const hintergruende = [
-      "linear-gradient(120deg, #84fab0, #8fd3f4)",
-      "linear-gradient(120deg, #ff9a9e, #fad0c4)",
-      "linear-gradient(120deg, #a18cd1, #fbc2eb)",
-      "linear-gradient(120deg, #fddb92, #d1fdff)",
-      "linear-gradient(120deg, #f6d365, #fda085)",
-      "linear-gradient(120deg, #89f7fe, #66a6ff)"
-    ];
-
     const chipID = "chip1";
     const heute = new Date();
     const tagNum = heute.getFullYear()*10000 + (heute.getMonth()+1)*100 + heute.getDate();
