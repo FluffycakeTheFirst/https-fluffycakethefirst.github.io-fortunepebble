@@ -8,8 +8,8 @@
       margin: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column;   
-      align-items: center;      
+      flex-direction: column;   /* Inhalte untereinander anordnen */
+      align-items: center;      /* horizontal zentrieren */
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 1em;
@@ -17,16 +17,16 @@
     }
 
     #content {
-      margin-top: 160px; 
+      margin-top: 160px; /* Abstand vom oberen Rand */
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     #logo img {
-      height: 540px;
+      height: 540px;  /* Logo-Größe */
       width: auto;
-      margin-bottom: 0; 
+      margin-bottom: 0; /* kein Abstand zwischen Logo und Spruch */
       display: block;
     }
 
@@ -38,26 +38,26 @@
       text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
       line-height: 1.2;
       word-wrap: break-word;
-      margin: 0.5em 0 1em 0;
     }
 
     /* Mystischer Button */
     #newButton {
-      font-size: 1.3em;
-      padding: 0.6em 1.5em;
-      border: 2px solid #fff;
-      border-radius: 30px;
+      font-size: 2em;              /* deutlich größere Schrift */
+      padding: 1em 2.5em;          /* mehr Abstand innen */
+      border: 3px solid #fff;      /* etwas dickerer Rahmen */
+      border-radius: 40px;
       background: transparent;
       color: #fff;
-      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+      text-shadow: 0 0 10px rgba(255,255,255,0.9);
       cursor: pointer;
       transition: all 0.3s ease;
+      margin-top: 1em;
     }
 
     #newButton:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.6);
-      transform: scale(1.08);
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 0 25px rgba(255,255,255,0.8);
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -71,8 +71,8 @@
     <!-- Spruch -->
     <div id="satz"></div>
 
-    <!-- Mystischer Button -->
-    <button id="newButton">✨ Neuer Spruch ✨</button>
+    <!-- Button für neuen Spruch -->
+    <button id="newButton">Neuer Spruch</button>
   </div>
 
   <script>
@@ -98,35 +98,29 @@
     document.body.style.background = bg;
 
     let sprueche = [];
-    let currentIndex = -1;
 
     function zeigeSpruch(index) {
       document.getElementById("satz").innerText = sprueche[index];
-    }
-
-    function neuerSpruch() {
-      if (sprueche.length === 0) return;
-      let newIndex;
-      do {
-        newIndex = Math.floor(Math.random() * sprueche.length);
-      } while (newIndex === currentIndex);
-      currentIndex = newIndex;
-      zeigeSpruch(currentIndex);
     }
 
     fetch('fortunepebble.txt')
       .then(response => response.text())
       .then(text => {
         sprueche = text.split('\n').filter(line => line.trim() !== '');
-        currentIndex = (tagNum + chipNum) % sprueche.length;
-        zeigeSpruch(currentIndex);
+        const index = (tagNum + chipNum) % sprueche.length;
+        zeigeSpruch(index);
       })
       .catch(err => {
         console.error('Fehler beim Laden der Sprüche:', err);
         document.getElementById("satz").innerText = "Fehler beim Laden der Sprüche!";
       });
 
-    document.getElementById("newButton").addEventListener("click", neuerSpruch);
+    document.getElementById("newButton").addEventListener("click", () => {
+      if (sprueche.length > 0) {
+        const randomIndex = Math.floor(Math.random() * sprueche.length);
+        zeigeSpruch(randomIndex);
+      }
+    });
   </script>
 </body>
 </html>
