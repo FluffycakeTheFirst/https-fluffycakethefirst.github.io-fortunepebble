@@ -14,6 +14,12 @@
       text-align: center;
       padding: 1em;
       transition: background 1s;
+
+      /* Hintergrundbild statt Farbverlauf */
+      background-image: url("LuckyPebbleHintergrund1.png");
+      background-size: cover;       /* füllt den gesamten Bildschirm */
+      background-position: center;  /* zentriert das Bild */
+      background-repeat: no-repeat; /* verhindert Wiederholung */
     }
 
     #content {
@@ -34,30 +40,29 @@
       max-width: 90%;
       font-size: 6vw;
       font-weight: bold;            
-      color: #ffffff;              
-      text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
+      color: #000000;   /* schwarz, da dein Hintergrund hell ist */
+      text-shadow: none; /* Schatten entfernt */
       line-height: 1.2;
       word-wrap: break-word;
     }
 
     /* Mystischer Button */
     #newButton {
-      font-size: 2em;              /* deutlich größere Schrift */
-      padding: 1em 2.5em;          /* mehr Abstand innen */
-      border: 3px solid #fff;      /* etwas dickerer Rahmen */
+      font-size: 2em;
+      padding: 1em 2.5em;
+      border: 3px solid #000;   /* schwarzer Rand passend zum Stil */
       border-radius: 40px;
-      background: transparent;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.6); /* leicht transparent weiß */
+      color: #000;
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: 1em;
     }
 
     #newButton:hover {
-      background: rgba(255,255,255,0.15);
-      box-shadow: 0 0 25px rgba(255,255,255,0.8);
-      transform: scale(1.1);
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -76,15 +81,6 @@
   </div>
 
   <script>
-    const hintergruende = [
-      "linear-gradient(120deg, #84fab0, #8fd3f4)",
-      "linear-gradient(120deg, #ff9a9e, #fad0c4)",
-      "linear-gradient(120deg, #a18cd1, #fbc2eb)",
-      "linear-gradient(120deg, #fddb92, #d1fdff)",
-      "linear-gradient(120deg, #f6d365, #fda085)",
-      "linear-gradient(120deg, #89f7fe, #66a6ff)"
-    ];
-
     const chipID = "chip1";
     const heute = new Date();
     const tagNum = heute.getFullYear()*10000 + (heute.getMonth()+1)*100 + heute.getDate();
@@ -93,9 +89,6 @@
     for (let i = 0; i < chipID.length; i++) {
       chipNum += chipID.charCodeAt(i);
     }
-
-    const bg = hintergruende[Math.floor(Math.random() * hintergruende.length)];
-    document.body.style.background = bg;
 
     let sprueche = [];
 
