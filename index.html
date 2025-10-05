@@ -13,13 +13,12 @@
       font-family: 'Arial', sans-serif;
       text-align: center;
       padding: 1em;
-      transition: background 1s;
 
-      /* Hintergrundbild statt Farbverlauf */
+      /* Hintergrundbild */
       background-image: url("LuckyPebbleHintergrund1.png");
-      background-size: cover;       /* füllt den gesamten Bildschirm */
-      background-position: center;  /* zentriert das Bild */
-      background-repeat: no-repeat; /* verhindert Wiederholung */
+      background-size: 100% 100%;   /* strecken oder stauchen, um immer zu füllen */
+      background-repeat: no-repeat;
+      background-position: center;
     }
 
     #content {
@@ -40,29 +39,29 @@
       max-width: 90%;
       font-size: 6vw;
       font-weight: bold;            
-      color: #000000;   /* schwarz, da dein Hintergrund hell ist */
-      text-shadow: none; /* Schatten entfernt */
+      color: #ffffff;              
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
       line-height: 1.2;
       word-wrap: break-word;
+      margin-bottom: 1em;
     }
 
-    /* Mystischer Button */
-    #newButton {
-      font-size: 2em;
-      padding: 1em 2.5em;
-      border: 3px solid #000;   /* schwarzer Rand passend zum Stil */
-      border-radius: 40px;
-      background: rgba(255,255,255,0.6); /* leicht transparent weiß */
-      color: #000;
+    #neuerSpruch {
+      padding: 20px 40px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 1em;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s, background 0.3s;
     }
 
-    #newButton:hover {
-      background: rgba(255,255,255,0.85);
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    #neuerSpruch:hover {
       transform: scale(1.05);
+      background: linear-gradient(135deg, #fad0c4, #ff9a9e);
     }
   </style>
 </head>
@@ -76,11 +75,20 @@
     <!-- Spruch -->
     <div id="satz"></div>
 
-    <!-- Button für neuen Spruch -->
-    <button id="newButton">Neuer Spruch</button>
+    <!-- Button -->
+    <button id="neuerSpruch">🍪 Neuer Spruch</button>
   </div>
 
   <script>
+    const hintergruende = [
+      "linear-gradient(120deg, #84fab0, #8fd3f4)",
+      "linear-gradient(120deg, #ff9a9e, #fad0c4)",
+      "linear-gradient(120deg, #a18cd1, #fbc2eb)",
+      "linear-gradient(120deg, #fddb92, #d1fdff)",
+      "linear-gradient(120deg, #f6d365, #fda085)",
+      "linear-gradient(120deg, #89f7fe, #66a6ff)"
+    ];
+
     const chipID = "chip1";
     const heute = new Date();
     const tagNum = heute.getFullYear()*10000 + (heute.getMonth()+1)*100 + heute.getDate();
@@ -92,8 +100,9 @@
 
     let sprueche = [];
 
-    function zeigeSpruch(index) {
-      document.getElementById("satz").innerText = sprueche[index];
+    function ladeSpruch(index) {
+      const spruch = sprueche[index % sprueche.length];
+      document.getElementById("satz").innerText = spruch;
     }
 
     fetch('fortunepebble.txt')
@@ -101,19 +110,18 @@
       .then(text => {
         sprueche = text.split('\n').filter(line => line.trim() !== '');
         const index = (tagNum + chipNum) % sprueche.length;
-        zeigeSpruch(index);
+        ladeSpruch(index);
+
+        // Button-Click → neuer zufälliger Spruch
+        document.getElementById("neuerSpruch").addEventListener("click", () => {
+          const randomIndex = Math.floor(Math.random() * sprueche.length);
+          ladeSpruch(randomIndex);
+        });
       })
       .catch(err => {
         console.error('Fehler beim Laden der Sprüche:', err);
         document.getElementById("satz").innerText = "Fehler beim Laden der Sprüche!";
       });
-
-    document.getElementById("newButton").addEventListener("click", () => {
-      if (sprueche.length > 0) {
-        const randomIndex = Math.floor(Math.random() * sprueche.length);
-        zeigeSpruch(randomIndex);
-      }
-    });
   </script>
 </body>
 </html>
